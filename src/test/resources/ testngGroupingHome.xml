@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="MySuite">
+    <test name="FirstGroup">
+        <groups>
+            <run>
+                <include name="first"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="src.test.grouping.GroupsTest"/>
+        </classes>
+    </test>
+    <test name="SecondGroup">
+        <groups>
+            <run>
+                <include name="second"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="src.test.grouping.GroupsTest"/>
+        </classes>
+    </test>
+</suite>

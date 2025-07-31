@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="MySuite" parallel="classes" thread-count="2">
+    <test name="MyTest">
+        <parameter name="user" value="thirdUser"/>
+        <classes>
+            <class name="src.test.checkLogin.CheckLoginParametersTest"/>
+        </classes>
+    </test>
+</suite>
