@@ -35,7 +35,7 @@ public class AlertsTest {
     }
 
     @Test
-    public void shouldCheckAlerts() throws InterruptedException {
+    public void shouldCheckAlerts() {
         LoginAndersen.shouldLoginInAndersen(driver);
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".justify-center.cursor-pointer")));
@@ -50,15 +50,8 @@ public class AlertsTest {
         WebElement optionSelect = driver.findElement(By.xpath("//div[text() = 'Actions, Alerts & Iframes']"));
         optionSelect.click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(actionPage.pageTitle));
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(actionPage.confirmButton));
-
-        new Actions(driver)
-                .moveToElement(actionPage.getConfirmButton())
-                .click()
-                .pause(Duration.ofSeconds(3))
-                .perform();
+        WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("iframe[title='Finish your registration']")));
+        driver.switchTo().frame(iframe);
 
         actionPage.getConfirmButton().click();
 
@@ -73,8 +66,6 @@ public class AlertsTest {
         new Actions(driver)
                 .doubleClick(actionPage.getDiscountButton())
                 .perform();
-
-        Thread.sleep(3000);
 
         Alert alert2 = driver.switchTo().alert();
 
@@ -96,11 +87,9 @@ public class AlertsTest {
 
         alert3.sendKeys(myText);
 
+        alert3.accept();
+
         assertTrue(actionPage.getMessage3().getText().contains(myText));
-
-        Thread.sleep(4000);
-
-
     }
 
     @AfterEach
