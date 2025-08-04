@@ -14,10 +14,6 @@ public class DragAndDropPage {
 
     public By pageTitle = By.xpath("//h1[text()='Sort your responsibilities']");
 
-    public WebElement getPageTitle() {
-        return driver.findElement(By.xpath("//h1[text()='Sort your responsibilities']"));
-    }
-
     public WebElement getFirstElement() {
         return driver.findElement(By.id("manual1"));
     }

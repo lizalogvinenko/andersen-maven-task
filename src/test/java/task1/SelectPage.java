@@ -42,14 +42,6 @@ public class SelectPage {
         return driver.findElement(By.id("MultipleSelect"));
     }
 
-    public WebElement getPythonAQA() {
-        return driver.findElement(By.id("AQA Python with index 14"));
-    }
-
-    public WebElement getJavaAQA() {
-        return driver.findElement(By.id("AQA Java with index 15"));
-    }
-
     public WebElement getSearchButton() {
         return driver.findElement(By.name("SelectPageSearchButton"));
     }
