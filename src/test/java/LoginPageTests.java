@@ -2,6 +2,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.LoginPage;
@@ -9,6 +12,7 @@ import pages.RegisterPage;
 import util.AuthData;
 
 import java.time.Duration;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -143,6 +147,17 @@ public class LoginPageTests {
 
     @AfterEach
     void quiteBrowser() {
+        driver.quit();
+    }
+
+    @AfterEach
+    void tearDown(){
+        LogEntries browserLogs = driver.manage().logs().get(LogType.BROWSER);
+        List<LogEntry> allLogRows = browserLogs.getAll();
+
+        if (allLogRows.size() > 0){
+
+        }
         driver.quit();
     }
 }
