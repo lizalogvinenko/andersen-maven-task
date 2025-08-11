@@ -1,3 +1,5 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +13,12 @@ import pages.LoginPage;
 import pages.RegisterPage;
 import util.AuthData;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -145,19 +152,13 @@ public class LoginPageTests {
         assertTrue(loginPage.errorMessageLongPassword().isDisplayed());
     }
 
-    @AfterEach
-    void quiteBrowser() {
-        driver.quit();
-    }
+    private static final Logger logger = LogManager.getLogger(LoginPageTests.class);
 
     @AfterEach
-    void tearDown(){
-        LogEntries browserLogs = driver.manage().logs().get(LogType.BROWSER);
-        List<LogEntry> allLogRows = browserLogs.getAll();
+    void tearDown() {
+        logger.info("This is an informational message.");
+        logger.error("This is an error message.");
 
-        if (allLogRows.size() > 0){
-
-        }
         driver.quit();
     }
 }
