@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import pages.LoginPage;
 import pages.RegisterPage;
 import util.AuthData;
@@ -175,11 +177,15 @@ public class LoginPageTests {
         logger.error("Test failed. Password field accepts more than 21 characters.");
     }
 
-    @AfterEach
-    void tearDown() {
-        logger.info("This is an informational message.");
-        logger.error("This is an error message.");
+    @AfterMethod
+    void tearDown(ITestResult iTestResult) {
+        if (iTestResult.getStatus() == ITestResult.FAILURE) {
+            logger.error("Test failed.");
+        }
+    }
 
+    @AfterEach
+    void closeBrowser() {
         driver.quit();
     }
 }
