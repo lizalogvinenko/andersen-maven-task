@@ -1,5 +1,8 @@
 package pages;
 
+import io.qameta.allure.Step;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -92,21 +95,31 @@ public class LoginPage {
         return this;
     }
 
+    private static final Logger logger = LogManager.getLogger(LoginPage.class);
+
+    @Step("click on login button")
     public void clickOnLoginButton() {
         loginButton().click();
+        logger.info("clicked on login button");
     }
 
+    @Step("click on registration link")
     public void clickOnRegistrationLink() {
         registerLink().click();
+        logger.info("clicked on registration link");
     }
 
+    @Step("click on email field")
     public LoginPage clickOnEmailField() {
         emailField().click();
+        logger.info("clicked on email field");
         return this;
     }
 
+    @Step("click on password field")
     public LoginPage clickOnPasswordField() {
         passwordField().click();
+        logger.info("clicked on password field");
         return this;
     }
 }

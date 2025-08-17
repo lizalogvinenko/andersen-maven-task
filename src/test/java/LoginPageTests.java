@@ -21,6 +21,7 @@ public class LoginPageTests {
     WebDriverWait wait;
     LoginPage loginPage;
     RegisterPage registerPage;
+    private static final Logger logger = LogManager.getLogger(LoginPageTests.class);
 
     @BeforeEach
     public void setUp() {
@@ -37,15 +38,21 @@ public class LoginPageTests {
         wait.until(ExpectedConditions.presenceOfElementLocated(loginPage.title));
 
         assertEquals(loginPage.title().getText(), "Sign In");
+        logger.info("Test passed. Page title is correct.");
+        logger.error("Test failed. Page title doesn't correct.");
     }
 
     @Test
     public void shouldCheckFieldsPlaceholders() {
         wait.until(ExpectedConditions.presenceOfElementLocated(loginPage.emailField));
         assertEquals(loginPage.emailField().getAttribute("placeholder"), AuthData.EMAIL_PLACEHOLDER);
+        logger.info("Test passed. Email field placeholder is correct.");
+        logger.error("Test failed. Email field placeholder doesn't correct.");
 
         assertTrue(loginPage.passwordField().isDisplayed());
         assertEquals(loginPage.passwordField().getAttribute("placeholder"), AuthData.PASSWORD_PLACEHOLDER);
+        logger.info("Test passed. Password field placeholder is correct.");
+        logger.error("Test failed. Password field placeholder doesn't correct.");
     }
 
     @Test
@@ -55,8 +62,11 @@ public class LoginPageTests {
         loginPage
                 .enterNotEmailFormat()
                 .clickOnPasswordField();
+        logger.info("Entered not email format.");
 
         assertTrue(loginPage.errorMessageNotValidEmail().isDisplayed());
+        logger.info("Test passed. Email field doesn't accept invalid format.");
+        logger.error("Test failed. Email field accepts invalid format.");
     }
 
     @Test
@@ -67,9 +77,12 @@ public class LoginPageTests {
                 .enterInvalidEmail()
                 .enterValidPassword()
                 .clickOnLoginButton();
+        logger.info("Entered wrong email, correct password, clicked on Sign in button.");
 
         wait.until(ExpectedConditions.presenceOfElementLocated(loginPage.errorMessageNotValidCredentials));
         assertTrue(loginPage.errorMessageNotValidCredentials().isDisplayed());
+        logger.info("Test passed. Email field doesn't wrong email.");
+        logger.error("Test failed. Email field accepts wrong email.");
     }
 
     @Test
@@ -80,9 +93,12 @@ public class LoginPageTests {
                 .enterValidEmail()
                 .enterInvalidPassword()
                 .clickOnLoginButton();
+        logger.info("Entered correct email, wrong password, clicked on Sign in button.");
 
         wait.until(ExpectedConditions.presenceOfElementLocated(loginPage.errorMessageNotValidCredentials));
         assertTrue(loginPage.errorMessageNotValidCredentials().isDisplayed());
+        logger.info("Test passed. Password field doesn't wrong email.");
+        logger.error("Test failed. Password field accepts wrong email.");
     }
 
     @Test
@@ -90,18 +106,24 @@ public class LoginPageTests {
         wait.until(ExpectedConditions.elementToBeClickable(loginPage.registerLink));
 
         loginPage.clickOnRegistrationLink();
+        logger.info("Clicked on registration link.");
 
         assertFalse(loginPage.title().getText().contains("Sign in"));
+        logger.info("Test passed. Registration link is available.");
+        logger.error("Test failed. Registration link doesn't available.");
     }
 
     @Test
-    public void shouldLeadToRegisterButton() {
+    public void shouldLeadToRegisterPage() {
         wait.until(ExpectedConditions.elementToBeClickable(loginPage.registerLink));
 
         loginPage.clickOnRegistrationLink();
+        logger.info("Clicked on registration link.");
 
         assertTrue(registerPage.title().isDisplayed());
         assertTrue(registerPage.title().getText().contains("Registration"));
+        logger.info("Test passed. Registration link leads to Registration page.");
+        logger.error("Test failed. Registration link doesn't lead to Registration page.");
     }
 
     @Test
@@ -121,6 +143,8 @@ public class LoginPageTests {
         loginPage.enterValidPassword();
 
         assertTrue(loginPage.loginButton().isEnabled());
+        logger.info("Test passed. Sign in button activates after both fields are filled.");
+        logger.error("Test failed. Sign in button activates before both fields are filled.");
     }
 
     @Test
@@ -130,8 +154,11 @@ public class LoginPageTests {
         loginPage
                 .enterShortPassword()
                 .clickOnEmailField();
+        logger.info("Entered less then 8 char password.");
 
         assertTrue(loginPage.errorMessageShortPassword().isDisplayed());
+        logger.info("Test passed. Password field doesn't accept less than 8 characters.");
+        logger.error("Test failed. Password field accepts less than 8 characters.");
     }
 
     @Test
@@ -141,11 +168,12 @@ public class LoginPageTests {
         loginPage
                 .enterLongPassword()
                 .clickOnEmailField();
+        logger.info("Entered more then 21 char password.");
 
         assertTrue(loginPage.errorMessageLongPassword().isDisplayed());
+        logger.info("Test passed. Password field doesn't accept more than 21 characters.");
+        logger.error("Test failed. Password field accepts more than 21 characters.");
     }
-
-    private static final Logger logger = LogManager.getLogger(LoginPageTests.class);
 
     @AfterEach
     void tearDown() {
