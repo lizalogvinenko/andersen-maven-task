@@ -1,7 +1,7 @@
 Feature: Testing Login Page
 
   Background:
-    Given Set up driver
+    Given Open browser
 
   Scenario: Testing positive authorization scenario
 
@@ -10,7 +10,7 @@ Feature: Testing Login Page
     And Set valid Password
     And Click on Sign in button
     Then Check name on Profile Page
-    Then Quit browser
+    Then Close browser
 
   Scenario: Testing when Sign in button activates
 
@@ -19,7 +19,7 @@ Feature: Testing Login Page
     And Set valid email
     And Set valid Password
     Then Check activation status
-    Then Quit browser
+    Then Close browser
 
   Scenario: Testing negative scenario with entering invalid password
 
@@ -28,4 +28,4 @@ Feature: Testing Login Page
     And Set invalid Password
     And Click on Sign in button
     Then Check if not valid password error message appears
-    Then Quit browser
+    Then Close browser

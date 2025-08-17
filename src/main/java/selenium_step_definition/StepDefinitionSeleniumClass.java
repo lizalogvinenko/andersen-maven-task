@@ -21,7 +21,7 @@ public class StepDefinitionSeleniumClass {
     WebDriverWait wait;
     LoginPage loginPage;
 
-    @Given("Set up driver")
+    @Given("Open browser")
     public void set_up_driver() {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -81,7 +81,7 @@ public class StepDefinitionSeleniumClass {
         assertTrue(loginPage.errorMessageNotValidCredentials().isDisplayed());
     }
 
-    @Then("Quit browser")
+    @Then("Close browser")
     public void quit_browser() {
         driver.quit();
     }
